@@ -1,9 +1,10 @@
-"""Build explicit normal mip atlas and reproducible shaderpack/source ZIPs."""
+"""Build the normal atlas and reproducible shaderpack/source ZIPs."""
 from pathlib import Path
 import argparse, hashlib, json, zipfile
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
-NAME='VotV-Quake-1.0.0'
+NAME='Minecraft-VotV-Shaderpack-1.0.0'
+DIST=ROOT/'dist'
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def atlas():
     image=Image.new('RGBA',(4096,2048),(128,128,255,255))
@@ -22,7 +23,7 @@ def atlas():
         entries.append({'source':p.relative_to(ROOT).as_posix(),'sha256':digest(p),'size':s,'levels':levels})
     dest=ROOT/'shaders/textures/votv_normals.png';dest.parent.mkdir(parents=True,exist_ok=True)
     image.save(dest,optimize=True)
-    (ROOT/'NORMAL_TEXTURES.json').write_text(json.dumps({'source':'User-supplied VotV installation; see README_RU.md','atlas_sha256':digest(dest),'textures':entries},indent=2)+'\n','utf-8')
+    (ROOT/'NORMAL_TEXTURES.json').write_text(json.dumps({'source':'User-supplied VotV installation; see README.md','atlas_sha256':digest(dest),'textures':entries},indent=2)+'\n','utf-8')
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--atlas-only',action='store_true');a=ap.parse_args()
     atlas()
@@ -37,10 +38,11 @@ def main():
     if a.atlas_only:return
     shaderfiles=sorted(p for p in (ROOT/'shaders').rglob('*') if p.is_file())
     (ROOT/'SHADERS.sha256').write_text(''.join(f'{digest(p)}  {p.relative_to(ROOT).as_posix()}\n' for p in shaderfiles),'utf-8')
-    files=sorted(p for p in ROOT.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix not in ['.pyc','.zip'])
+    files=sorted(p for p in ROOT.rglob('*') if p.is_file() and not ({'.git','__pycache__','dist','.venv'} & set(p.relative_to(ROOT).parts)) and p.suffix not in ['.pyc','.zip'])
+    DIST.mkdir(exist_ok=True)
     for sources in [False,True]:
-        archive=ROOT.parent/(NAME+('-sources' if sources else '')+'.zip')
-        selected=files if sources else [p for p in files if p.relative_to(ROOT).parts[0] not in ['assets','research','tests','tools']]
+        archive=DIST/(NAME+('-sources' if sources else '')+'.zip')
+        selected=files if sources else [p for p in files if p.relative_to(ROOT).parts[0]=='shaders']
         prefix=NAME+'/' if sources else ''
         with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
             for p in selected:
@@ -49,6 +51,6 @@ def main():
         with zipfile.ZipFile(archive) as z:
             assert z.testzip() is None and len(z.namelist())==len(set(z.namelist()))
             assert prefix+'shaders/gbuffers_water.fsh' in z.namelist()
-        archive.with_suffix('.sha256').write_text(digest(archive)+'  '+archive.name+'\n','utf-8')
+        archive.with_suffix(archive.suffix+'.sha256').write_text(digest(archive)+'  '+archive.name+'\n','utf-8')
         print(archive.name,archive.stat().st_size,digest(archive))
 if __name__=='__main__':main()

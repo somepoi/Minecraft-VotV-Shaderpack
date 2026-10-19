@@ -1,3 +1,26 @@
+# Python
 __pycache__/
 *.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Local build output and shaderpack archives
+/dist/
+/build/
 *.zip
+*.zip.sha256
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+
+# Local test and coverage output
+.pytest_cache/
+.coverage
+htmlcov/

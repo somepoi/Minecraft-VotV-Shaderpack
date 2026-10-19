@@ -47,7 +47,7 @@ vec4 gsSurface(sampler2D image, vec2 uv, vec2 mid, vec2 halfSpan) {
     return mix(nearSample, nativeSample, smoothstep(1.0, 2.0, rho));
 #else
     // Avoid levels coarser than the face's UV extent. Existing mip levels are
-    // supplied by Minecraft, not created by this pack. See README_RU.
+    // supplied by Minecraft, not created by this pack. See README.md.
     // Match the bound rounding tolerance above: a contracted 16-texel face
     // must still be allowed to reach mip 4 rather than being rounded to mip 3.
     float faceMax = floor(log2(max(min(span.x, span.y) + 0.04, 1.0)));
