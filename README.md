@@ -14,7 +14,7 @@
 
 ## Установка
 
-1. Скачай `Minecraft-VotV-Shaderpack-1.0.0.zip` из [последнего релиза](https://github.com/somepoi/Minecraft-VotV-Shaderpack/releases/latest), когда он будет опубликован.
+1. Скачай ZIP shaderpack из [последнего релиза](https://github.com/somepoi/Minecraft-VotV-Shaderpack/releases/latest), когда он будет опубликован.
 2. Не распаковывая ZIP, помести его в папку `shaderpacks` профиля Minecraft.
 3. В настройках Oculus выбери **Minecraft VotV Shaderpack**.
 
@@ -33,7 +33,7 @@ python -m pip install -r requirements-build.txt
 python tools/build.py
 ```
 
-Готовый shaderpack и архив исходников появятся в `dist/`. Для проверки, что сгенерированные файлы соответствуют исходникам:
+Готовый shaderpack и архив исходников появятся в `dist/`. Версию можно указать явно, как в теге релиза, например `python tools/build.py --version 1.2.3`. Для проверки, что сгенерированные файлы соответствуют исходникам:
 
 ```powershell
 python tools/build.py

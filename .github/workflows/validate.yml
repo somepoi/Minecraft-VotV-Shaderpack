@@ -27,3 +27,14 @@ jobs:
 
       - name: Ensure generated files are up to date
         run: git diff --exit-code
+
+      - name: Upload shaderpack artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Minecraft-VotV-Shaderpack
+          path: |
+            dist/Minecraft-VotV-Shaderpack-1.0.0.zip
+            dist/Minecraft-VotV-Shaderpack-1.0.0.zip.sha256
+          if-no-files-found: error
+          retention-days: 90

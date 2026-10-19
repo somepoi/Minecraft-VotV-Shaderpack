@@ -1,9 +1,10 @@
 """Build the normal atlas and reproducible shaderpack/source ZIPs."""
 from pathlib import Path
-import argparse, hashlib, json, zipfile
+import argparse, hashlib, json, re, zipfile
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
-NAME='Minecraft-VotV-Shaderpack-1.0.0'
+PROJECT_NAME='Minecraft-VotV-Shaderpack'
+DEFAULT_VERSION='1.0.0'
 DIST=ROOT/'dist'
 BUILTIN_BINARY_SUFFIXES={'.png','.zip','.jar'}
 def normalized_bytes(p):
@@ -34,7 +35,10 @@ def atlas():
         image.save(dest,optimize=True)
     (ROOT/'NORMAL_TEXTURES.json').write_text(json.dumps({'source':'User-supplied VotV installation; see README.md','atlas_sha256':digest(dest),'textures':entries},indent=2)+'\n','utf-8',newline='\n')
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--atlas-only',action='store_true');a=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--atlas-only',action='store_true');ap.add_argument('--version',default=DEFAULT_VERSION,help='Release version, without the leading v (default: %(default)s)');a=ap.parse_args()
+    if not re.fullmatch(r'\d+\.\d+\.\d+',a.version):
+        ap.error('--version must use MAJOR.MINOR.PATCH format, for example 1.2.3')
+    name=f'{PROJECT_NAME}-{a.version}'
     atlas()
     shaders=ROOT/'shaders'
     for p in list(shaders.glob('*.vsh'))+list(shaders.glob('*.fsh')):
@@ -50,9 +54,9 @@ def main():
     files=sorted(p for p in ROOT.rglob('*') if p.is_file() and not ({'.git','__pycache__','dist','.venv'} & set(p.relative_to(ROOT).parts)) and p.suffix not in ['.pyc','.zip'])
     DIST.mkdir(exist_ok=True)
     for sources in [False,True]:
-        archive=DIST/(NAME+('-sources' if sources else '')+'.zip')
+        archive=DIST/(name+('-sources' if sources else '')+'.zip')
         selected=files if sources else [p for p in files if p.relative_to(ROOT).parts[0]=='shaders']
-        prefix=NAME+'/' if sources else ''
+        prefix=name+'/' if sources else ''
         with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
             for p in selected:
                 e=zipfile.ZipInfo(prefix+p.relative_to(ROOT).as_posix(),(2026,10,19,0,0,0));e.compress_type=zipfile.ZIP_DEFLATED;e.external_attr=0o644<<16

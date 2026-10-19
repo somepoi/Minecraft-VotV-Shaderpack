@@ -23,13 +23,28 @@ jobs:
       - name: Install build dependency
         run: python -m pip install -r requirements-build.txt
 
+      - name: Read and validate tag version
+        id: version
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          if [[ "$TAG_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            echo "version=${BASH_REMATCH[1]}" >> "$GITHUB_OUTPUT"
+          else
+            echo "Tag must use vMAJOR.MINOR.PATCH format, for example v1.2.3" >&2
+            exit 1
+          fi
+
       - name: Build archives
-        run: python tools/build.py
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: python tools/build.py --version "$VERSION"
 
       - name: Publish release assets
         uses: softprops/action-gh-release@v2
         with:
+          name: Minecraft VotV Shaderpack v${{ steps.version.outputs.version }}
           generate_release_notes: true
           files: |
-            dist/Minecraft-VotV-Shaderpack-1.0.0.zip
-            dist/Minecraft-VotV-Shaderpack-1.0.0.zip.sha256
+            dist/Minecraft-VotV-Shaderpack-${{ steps.version.outputs.version }}.zip
+            dist/Minecraft-VotV-Shaderpack-${{ steps.version.outputs.version }}.zip.sha256
