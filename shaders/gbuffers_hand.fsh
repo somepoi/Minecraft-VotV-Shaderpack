@@ -1,0 +1,7 @@
+#version 330 compatibility
+/* DRAWBUFFERS:0 */
+#define GS_TEXTURED 1
+#define GS_LIT 1
+#define GS_FOG 0
+#define GS_MODEL
+#include "/lib/scene_fragment.glsl"

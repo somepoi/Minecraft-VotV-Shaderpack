@@ -1,0 +1,30 @@
+{
+  "source_pak_sha256": "eb95dec3f2e5bb80941a4e080c8b8e72bacd5cf8ff4d5848e64f7e4d2f6d7b1e",
+  "note": "Only the VotV dither mask and Quake-water normal map used by this shaderpack are listed. Texture filtering is implemented as nearest texel sampling.",
+  "files": [
+    {
+      "file": "shaders/textures/dithermask.png",
+      "sha256": "95f94ac48c4629f4adea619e63e734c257099f83120fc3d71ea57e9b60cf0828"
+    },
+    {
+      "file": "shaders/textures/votv_normals.png",
+      "sha256": "fb48230a0c42c84a07122b05dcda28061c5b6b7ebacb1abcade609a3d95d62d4"
+    },
+    {
+      "file": "assets/source-normals/water_n.png",
+      "sha256": "a3d01bef2b1ec254a501f82142677f6bd4bbd810eb63cfddd3dd5cf792e94663"
+    },
+    {
+      "file": "assets/source-normals/waterNorm1.png",
+      "sha256": "a5f12a161155eb72d0f4a695074c3620f42364f1be45054767978298e659771b"
+    },
+    {
+      "file": "assets/source-normals/waterNorm1_2x.png",
+      "sha256": "1c85bdc6af27f23e1fd09d7f9dc951689842944d83d842f657aa9c337a41e9e3"
+    },
+    {
+      "file": "assets/source-normals/waterNorm1_4x.png",
+      "sha256": "2ba2b979bd9147e62f828d0a7948e855522ed60210d9f81167e2a82ea54f4c11"
+    }
+  ]
+}

@@ -1,0 +1,378 @@
+{
+  "source": "User-supplied VotV installation; see README_RU.md",
+  "atlas_sha256": "fb48230a0c42c84a07122b05dcda28061c5b6b7ebacb1abcade609a3d95d62d4",
+  "textures": [
+    {
+      "source": "assets/source-normals/waterNorm1.png",
+      "sha256": "a5f12a161155eb72d0f4a695074c3620f42364f1be45054767978298e659771b",
+      "size": 1024,
+      "levels": [
+        {
+          "level": 0,
+          "origin": [
+            0,
+            0
+          ],
+          "size": 1024
+        },
+        {
+          "level": 1,
+          "origin": [
+            0,
+            1024
+          ],
+          "size": 512
+        },
+        {
+          "level": 2,
+          "origin": [
+            512,
+            1024
+          ],
+          "size": 256
+        },
+        {
+          "level": 3,
+          "origin": [
+            768,
+            1024
+          ],
+          "size": 128
+        },
+        {
+          "level": 4,
+          "origin": [
+            896,
+            1024
+          ],
+          "size": 64
+        },
+        {
+          "level": 5,
+          "origin": [
+            960,
+            1024
+          ],
+          "size": 32
+        },
+        {
+          "level": 6,
+          "origin": [
+            992,
+            1024
+          ],
+          "size": 16
+        },
+        {
+          "level": 7,
+          "origin": [
+            1008,
+            1024
+          ],
+          "size": 8
+        },
+        {
+          "level": 8,
+          "origin": [
+            1016,
+            1024
+          ],
+          "size": 4
+        },
+        {
+          "level": 9,
+          "origin": [
+            1020,
+            1024
+          ],
+          "size": 2
+        },
+        {
+          "level": 10,
+          "origin": [
+            1022,
+            1024
+          ],
+          "size": 1
+        }
+      ]
+    },
+    {
+      "source": "assets/source-normals/waterNorm1_2x.png",
+      "sha256": "1c85bdc6af27f23e1fd09d7f9dc951689842944d83d842f657aa9c337a41e9e3",
+      "size": 1024,
+      "levels": [
+        {
+          "level": 0,
+          "origin": [
+            1024,
+            0
+          ],
+          "size": 1024
+        },
+        {
+          "level": 1,
+          "origin": [
+            1024,
+            1024
+          ],
+          "size": 512
+        },
+        {
+          "level": 2,
+          "origin": [
+            1536,
+            1024
+          ],
+          "size": 256
+        },
+        {
+          "level": 3,
+          "origin": [
+            1792,
+            1024
+          ],
+          "size": 128
+        },
+        {
+          "level": 4,
+          "origin": [
+            1920,
+            1024
+          ],
+          "size": 64
+        },
+        {
+          "level": 5,
+          "origin": [
+            1984,
+            1024
+          ],
+          "size": 32
+        },
+        {
+          "level": 6,
+          "origin": [
+            2016,
+            1024
+          ],
+          "size": 16
+        },
+        {
+          "level": 7,
+          "origin": [
+            2032,
+            1024
+          ],
+          "size": 8
+        },
+        {
+          "level": 8,
+          "origin": [
+            2040,
+            1024
+          ],
+          "size": 4
+        },
+        {
+          "level": 9,
+          "origin": [
+            2044,
+            1024
+          ],
+          "size": 2
+        },
+        {
+          "level": 10,
+          "origin": [
+            2046,
+            1024
+          ],
+          "size": 1
+        }
+      ]
+    },
+    {
+      "source": "assets/source-normals/waterNorm1_4x.png",
+      "sha256": "2ba2b979bd9147e62f828d0a7948e855522ed60210d9f81167e2a82ea54f4c11",
+      "size": 1024,
+      "levels": [
+        {
+          "level": 0,
+          "origin": [
+            2048,
+            0
+          ],
+          "size": 1024
+        },
+        {
+          "level": 1,
+          "origin": [
+            2048,
+            1024
+          ],
+          "size": 512
+        },
+        {
+          "level": 2,
+          "origin": [
+            2560,
+            1024
+          ],
+          "size": 256
+        },
+        {
+          "level": 3,
+          "origin": [
+            2816,
+            1024
+          ],
+          "size": 128
+        },
+        {
+          "level": 4,
+          "origin": [
+            2944,
+            1024
+          ],
+          "size": 64
+        },
+        {
+          "level": 5,
+          "origin": [
+            3008,
+            1024
+          ],
+          "size": 32
+        },
+        {
+          "level": 6,
+          "origin": [
+            3040,
+            1024
+          ],
+          "size": 16
+        },
+        {
+          "level": 7,
+          "origin": [
+            3056,
+            1024
+          ],
+          "size": 8
+        },
+        {
+          "level": 8,
+          "origin": [
+            3064,
+            1024
+          ],
+          "size": 4
+        },
+        {
+          "level": 9,
+          "origin": [
+            3068,
+            1024
+          ],
+          "size": 2
+        },
+        {
+          "level": 10,
+          "origin": [
+            3070,
+            1024
+          ],
+          "size": 1
+        }
+      ]
+    },
+    {
+      "source": "assets/source-normals/water_n.png",
+      "sha256": "a3d01bef2b1ec254a501f82142677f6bd4bbd810eb63cfddd3dd5cf792e94663",
+      "size": 512,
+      "levels": [
+        {
+          "level": 0,
+          "origin": [
+            3072,
+            0
+          ],
+          "size": 512
+        },
+        {
+          "level": 1,
+          "origin": [
+            3072,
+            512
+          ],
+          "size": 256
+        },
+        {
+          "level": 2,
+          "origin": [
+            3328,
+            512
+          ],
+          "size": 128
+        },
+        {
+          "level": 3,
+          "origin": [
+            3456,
+            512
+          ],
+          "size": 64
+        },
+        {
+          "level": 4,
+          "origin": [
+            3520,
+            512
+          ],
+          "size": 32
+        },
+        {
+          "level": 5,
+          "origin": [
+            3552,
+            512
+          ],
+          "size": 16
+        },
+        {
+          "level": 6,
+          "origin": [
+            3568,
+            512
+          ],
+          "size": 8
+        },
+        {
+          "level": 7,
+          "origin": [
+            3576,
+            512
+          ],
+          "size": 4
+        },
+        {
+          "level": 8,
+          "origin": [
+            3580,
+            512
+          ],
+          "size": 2
+        },
+        {
+          "level": 9,
+          "origin": [
+            3582,
+            512
+          ],
+          "size": 1
+        }
+      ]
+    }
+  ]
+}
