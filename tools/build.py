@@ -4,13 +4,31 @@ import argparse, hashlib, json, re, zipfile
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 PROJECT_NAME='Minecraft-VotV-Shaderpack'
-DEFAULT_VERSION='1.0.0'
+DEFAULT_VERSION='1.0.2'
 DIST=ROOT/'dist'
 BUILTIN_BINARY_SUFFIXES={'.png','.zip','.jar'}
 def normalized_bytes(p):
     data=p.read_bytes()
     return data if p.suffix.lower() in BUILTIN_BINARY_SUFFIXES else data.replace(b'\r\n',b'\n')
 def digest(p):return hashlib.sha256(normalized_bytes(p)).hexdigest()
+def validate_iris_directives():
+    # Oculus 1.20.1's directive reader requires one vecN argument per component;
+    # although vec4(scalar) is legal GLSL, it aborts pack loading here.
+    pattern=re.compile(r'const\s+vec([234])\s+(\w+ClearColor)\s*=\s*vec[234]\(([^()]*)\)\s*;')
+    for p in (ROOT/'shaders').rglob('*'):
+        if p.suffix.lower() not in {'.fsh','.vsh','.glsl'}:continue
+        source=p.read_text('utf-8')
+        if re.search(r'\bgl_FragColor\b',source):
+            raise ValueError(f'{p.relative_to(ROOT)}: use gl_FragData[0] for fragment color output; Oculus 1.20.1 does not support gl_FragColor in its shader patcher')
+        for match in pattern.finditer(source):
+            expected=int(match.group(1)); actual=len(match.group(3).split(','))
+            if actual!=expected:
+                raise ValueError(f'{p.relative_to(ROOT)}: {match.group(2)} needs {expected} constructor arguments for Oculus 1.20.1, got {actual}')
+        for match in re.finditer(r'(?m)^\s*const\s+int\s+(colortex\d+Format)\s*=\s*([A-Z0-9_]+)\s*;',source):
+            comment_start=source.rfind('/*',0,match.start())
+            comment_end=source.rfind('*/',0,match.start())
+            if comment_start<comment_end:
+                raise ValueError(f'{p.relative_to(ROOT)}: {match.group(1)} must be inside a block comment; Iris format names are pack directives, not GLSL constants')
 def atlas():
     image=Image.new('RGBA',(4096,2048),(128,128,255,255))
     entries=[]
@@ -48,6 +66,7 @@ def main():
         for dimension in ['world-1','world1']:
             target=shaders/dimension/p.name;target.parent.mkdir(parents=True,exist_ok=True)
             target.write_text('#version 330 compatibility\n#define VT_OTHER_DIMENSION\n#include "/program/'+p.name+'.glsl"\n','utf-8',newline='\n')
+    validate_iris_directives()
     if a.atlas_only:return
     shaderfiles=sorted(p for p in (ROOT/'shaders').rglob('*') if p.is_file())
     (ROOT/'SHADERS.sha256').write_text(''.join(f'{digest(p)}  {p.relative_to(ROOT).as_posix()}\n' for p in shaderfiles),'utf-8',newline='\n')

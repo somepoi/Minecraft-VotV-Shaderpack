@@ -34,7 +34,7 @@ jobs:
         with:
           name: Minecraft-VotV-Shaderpack
           path: |
-            dist/Minecraft-VotV-Shaderpack-1.0.0.zip
-            dist/Minecraft-VotV-Shaderpack-1.0.0.zip.sha256
+            dist/Minecraft-VotV-Shaderpack-1.0.2.zip
+            dist/Minecraft-VotV-Shaderpack-1.0.2.zip.sha256
           if-no-files-found: error
           retention-days: 90

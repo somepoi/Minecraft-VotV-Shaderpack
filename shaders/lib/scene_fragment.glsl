@@ -1,4 +1,5 @@
 #include "/lib/settings.glsl"
+#include "/lib/common.glsl"
 #include "/lib/filter.glsl"
 #ifdef GS_WATER
 in vec3 vWorldPosition;

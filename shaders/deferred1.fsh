@@ -2,9 +2,11 @@
 /* DRAWBUFFERS:4 */
 #include "/lib/settings.glsl"
 #include "/lib/feedback.glsl"
+/*
 const int colortex4Format = RGBA32F;
+*/
 const bool colortex4Clear = false;
-const vec4 colortex4ClearColor = vec4(0.0);
+const vec4 colortex4ClearColor = vec4(0.0, 0.0, 0.0, 0.0);
 uniform sampler2D colortex4;
 uniform float frameTimeCounter;
 uniform int frameCounter;

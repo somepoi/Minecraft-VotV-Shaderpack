@@ -13,5 +13,5 @@ void main() {
         vec3 blue=colour*vec3(0.5,0.625,1.0)*(1.0-clamp(length(vUV-0.5)*2.0*amount,0.0,1.0));
         colour=mix(colour,blue,0.8*amount);
     }
-    gl_FragColor=vec4(vtQuantize(colour,gl_FragCoord.xy),1.0);
+    gl_FragData[0]=vec4(vtQuantize(colour,gl_FragCoord.xy),1.0);
 }
